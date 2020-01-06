@@ -13,16 +13,16 @@ jobs:
           && github.event.pull_request.merge_commit_sha != null
         )
 
-    strategy:
-      matrix:
-        node-version: [8.x, 10.x, 12.x]
+    # strategy:
+    #   matrix:
+    #     node-version: [8.x, 10.x, 12.x]
 
     steps:
     - uses: actions/checkout@v1
     - name: Check merge commit of Pull Request
       uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
+      # with:
+      #   node-version: ${{ matrix.node-version }}
     - name: npm audit
       run: |
         npm audit
