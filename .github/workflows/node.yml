@@ -11,8 +11,7 @@ jobs:
         node-version: "12.x"
     - name: npm install, and test
       run: |
-        npm install
-        npm audit
+        npm audit --json >> /home/itadmin/Desktop/testingWebhook/report.json || true
 
 
 
