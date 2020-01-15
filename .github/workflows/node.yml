@@ -1,18 +1,17 @@
-name: merge
-
+name: Test on Pull Request
 on: [pull_request]
-
 jobs:
   build:
-
     runs-on: ubuntu-latest
     if: |
         !(
-          (github.event.action == 'opened')
+          (github.event.action == 'opened' || github.event.action == 'reopened')
           && !github.event.pull_request.merged
           && github.event.pull_request.merge_commit_sha != null
         )
-
-    - name: npm audit
-      run: |
-        npm audit --json >> /home/itadmin/Desktop/testingWebhook/report.json || true
+    steps:
+      - name: Check merge commit of Pull Request
+        with: 
+          ref: ${{ github.event.pull_request.merge_commit_sha }}
+      - name: Test Hook
+        run: npm audit
